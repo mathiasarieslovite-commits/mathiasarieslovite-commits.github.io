@@ -1,4 +1,4 @@
-const CACHE="flash-offline-142b6c2619f8423f",FILES=["/","/apple-touch-icon.png","/assets/index-BIlq7Crt.css","/assets/index-Dkff2c9s.js","/favicon.svg","/icon-192.png","/icon-512.png","/icon.svg","/index.html","/manifest.webmanifest","/nulliverse-graveyard.jpeg"];
+const CACHE="flash-offline-8515ff297e1efded",FILES=["/","/apple-touch-icon.png","/assets/index-DVS8tncy.css","/assets/index-Nbd7TjaS.js","/favicon.svg","/icon-192.png","/icon-512.png","/icon.svg","/index.html","/manifest.webmanifest","/nulliverse-graveyard.jpeg"];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES))));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('flash-offline-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET'||new URL(e.request.url).origin!==self.location.origin)return;e.respondWith(caches.open(CACHE).then(async c=>{const cached=await c.match(e.request,{ignoreSearch:true});if(cached)return cached;if(e.request.mode==='navigate')return c.match('/index.html');return fetch(e.request);}));});
